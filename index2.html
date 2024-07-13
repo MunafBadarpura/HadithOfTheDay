@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Hadith Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #copy{
+            color: #0056b3;;
+            font-size: 10px;
+        }
+
+        .h{
+            font-size: 13px;
+        }
+
+        #hadith-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HADITH OF THE DAY</h1>
+        <button id="generate-hadith">Generate Hadith</button>
+        <div id="hadith-container">
+           <b> <p >Hadith:</p> </b>
+            <p id="hadith-text"></p>
+            <b> <p >Writer: </p> </b>
+            <p id="writer"></p>
+            <b><p > Book : </p> </b>
+            <p id="book">  </p>
+            <p class="h">New Hadith Everyday</p>
+            <p id="copy">©MUNAF</p>
+            
+            <!-- <p id="hadith-source"></p> -->
+        </div>
+    </div>
+    <script>
+        document.getElementById('generate-hadith').addEventListener('click', function() {
+            const apiUrl = 'https://www.hadithapi.com/api/hadiths?apiKey=$2y$10$PBIsMddW45nY3X2MmsflFeU8cBw6XsfCysnAmWYY8sPIhHKCEciIO';
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const hadithData = data.hadiths.data[0].hadithEnglish; 
+                    const hadithBook = data.hadiths.data[0].book.bookName; 
+                    const hadithWriter = data.hadiths.data[0].book.writerName; 
+
+                    document.getElementById('hadith-text').innerText = hadithData;
+                    document.getElementById('writer').innerText = hadithWriter;
+                    document.getElementById('book').innerText = hadithBook;
+                    console.log(hadithData);
+                    // document.getElementById('hadith-source').innerText = `Source: ${hadith.source}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching Hadith:', error);
+                });
+        });
+    </script>
+</body>
+</html>
