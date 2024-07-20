@@ -74,9 +74,9 @@
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    const hadithData = data.hadiths.data[10].hadithEnglish; 
-                    const hadithBook = data.hadiths.data[10].book.bookName; 
-                    const hadithWriter = data.hadiths.data[10].book.writerName; 
+                    const hadithData = data.hadiths.data[11].hadithEnglish; 
+                    const hadithBook = data.hadiths.data[11].book.bookName; 
+                    const hadithWriter = data.hadiths.data[11].book.writerName; 
 
                     document.getElementById('hadith-text').innerText = hadithData;
                     document.getElementById('writer').innerText = hadithWriter;
